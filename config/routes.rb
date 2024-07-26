@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [ :create, :show, :index, :destroy ]
-  resources :posts, only: [ :create ]
+  resources :posts, only: [ :create, :show, :update, :destroy ]
 
   get "/me", to: "users#me"
   post "/auth/login", to: "auth#login"
