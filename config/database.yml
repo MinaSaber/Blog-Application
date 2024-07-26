@@ -20,9 +20,9 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-# test:
-#   <<: *default
-#   database: storage/test.sqlite3
+test:
+  <<: *default
+  database: blog_test
 
 
 # SQLite3 write its data on the local filesystem, as such it requires
@@ -31,6 +31,6 @@ development:
 #
 # Similarly, if you deploy your application as a Docker container, you must
 # ensure the database is located in a persisted volume.
-production:
-  <<: *default
+# production:
+#   <<: *default
   # database: path/to/persistent/storage/production.sqlite3
