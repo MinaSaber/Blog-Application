@@ -1,6 +1,8 @@
 # Blog API
 
-This is a Ruby on Rails API for a blog application. The API allows users to create accounts, make posts, comment on posts, and tag posts. The application uses JWT for authentication and Sidekiq for background job processing.
+This is a Ruby on Rails API for a blog application. The API allows users to create accounts, make posts, comment on posts, and tag posts. The application uses JWT for authentication and Sidekiq for background job processing.  
+
+Note: All Api Endpoints tests are in spec/controllers
 
 ## Prerequisites
 
@@ -9,6 +11,10 @@ This is a Ruby on Rails API for a blog application. The API allows users to crea
 - PostgreSQL
 - Redis
 - Docker and Docker Compose
+
+## Database Schema
+![Screenshot 2024-07-26 181839](https://github.com/user-attachments/assets/a63bd09d-86b1-40b3-8ab9-6b5e3d7d6304)
+
 
 ## Running the Application
 
