@@ -1,24 +1,221 @@
-# README
+# Blog API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Ruby on Rails API for a blog application. The API allows users to create accounts, make posts, comment on posts, and tag posts. The application uses JWT for authentication and Sidekiq for background job processing.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+- Ruby 3.3.4
+- Rails 7.1.3
+- PostgreSQL
+- Redis
+- Docker and Docker Compose
 
-* System dependencies
+## Running the Application
 
-* Configuration
+```
+docker-compose up
+```
 
-* Database creation
+## API Documentation
 
-* Database initialization
+### Authentication
 
-* How to run the test suite
+- **Login**  
+  **Endpoint:** `POST /login`  
+  **Request:**
+  ```json
+  {
+    "user": {
+      "email": "user@example.com",
+      "password": "password123"
+    }
+  }
+  ```
+  **Response:**
+  ```json
+  {
+    "token": "jwt_token"
+  }
 
-* Services (job queues, cache servers, search engines, etc.)
+### Users
 
-* Deployment instructions
+- **Create User**  
+  **Endpoint:** `POST /users`  
+  **Request:**
+  ```json
+  {
+    "user": {
+      "name": "User",
+      "email": "user@example.com",
+      "password": "password",
+      "image": "base64_encoded_image"
+    }
+  }
+  ```
+  **Response:**
+  ```json
+  {
+    "name": "User",
+    "email": "user@example.com",
+    "image": "base64_encoded_image"
+  }
 
-* ...
+- **Get Current User**  
+  **Endpoint:** `GET /me`  
+  **Response:**
+  ```json
+  {
+    "name": "User",
+    "email": "user@example.com",
+    "image": "base64_encoded_image"
+  }
+
+### Posts
+
+- **Create Post**  
+  **Endpoint:** `POST /posts`  
+  **Request:**
+  ```json
+  {
+    "post": {
+      "title": "Post Title",
+      "body": "Post Body",
+      "tags_attributes": [
+        {
+          "tag": "tag1"
+        },
+        {
+          "tag": "tag2"
+        }
+      ]
+    }
+  }
+  ```
+  **Response:**
+  ```json
+  {
+    "title": "Post Title",
+    "body": "Post Body",
+    "tags_attributes": [
+      {
+        "tag": "tag1"
+      },
+      {
+        "tag": "tag2"
+      }
+    ],
+    "comments": []
+  }
+
+- **Get All Posts**  
+  **Endpoint:** `GET /posts`  
+  **Response:**
+  ```json
+  [
+    {
+      "title": "Post Title",
+      "body": "Post Body",
+      "tags_attributes": [
+        {
+          "tag": "tag1"
+        },
+        {
+          "tag": "tag2"
+        }
+      ],
+      "comments": []
+    }
+  ]
+
+- **Get Post**  
+  **Endpoint:** `GET /posts/:id`  
+  **Response:**
+  ```json
+  {
+    "title": "Post Title",
+    "body": "Post Body",
+    "tags_attributes": [
+      {
+        "tag": "tag1"
+      },
+      {
+        "tag": "tag2"
+      }
+    ],
+    "comments": []
+  }
+
+- **Update Post**  
+  **Endpoint:** `PUT /posts/:id`  
+  **Request:**
+  ```json
+  {
+    "post": {
+      "title": "Updated Title",
+      "body": "Updated Body",
+      "tags_attributes": [
+        {
+          "id": 1,
+          "tag": "tag1",
+          "_destroy": false
+        }
+      ]
+    }
+  }
+
+  ```
+  **Response:**
+  ```json
+  {
+    "title": "Updated Title",
+    "body": "Updated Body",
+    "tags_attributes": [
+      {
+        "tag": "tag1"
+      }
+    ],
+    "comments": []
+  }
+
+- **Delete Post**  
+  **Endpoint:** `DELETE /posts/:id`
+   **Response:** `204 No Content`
+
+### Comments
+
+- **Create Comment**  
+  **Endpoint:** `POST /posts/:post_id/comments`  
+  **Request:**
+  ```json
+  {
+    "comment": {
+      "comment": "This is a comment"
+    }
+  }
+  ```
+  **Response:**
+  ```json
+  {
+    "comment": "This is a comment"
+  }
+
+- **Update Comment**  
+  **Endpoint:** `POST /posts/:post_id/comments/:id`  
+  **Request:**
+  ```json
+  {
+    "comment": {
+      "comment": "Updated comment"
+    }
+  }
+  ```
+  **Response:**
+  ```json
+  {
+    "comment": "Updated comment"
+  }
+
+- **Delete Comment**  
+  **Endpoint:** `DELETE /posts/:post_id/comments/:id`
+   **Response:** `204 No Content`
+
