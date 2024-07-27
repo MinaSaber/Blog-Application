@@ -25,7 +25,7 @@ RUN apt-get update -qq && \
 #    BUNDLE_WITHOUT="development"
 
 # Throw-away build stage to reduce size of final image
-FROM base AS build
+# FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
@@ -51,12 +51,11 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
 # Final stage for app image
-FROM base
+# FROM base
 
 # Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-RUN rm -R /rails
-COPY --from=build /rails /rails
+# COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+# COPY --from=build /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \

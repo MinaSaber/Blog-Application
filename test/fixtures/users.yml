@@ -1,13 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+valid_user:
   name: "John Doe"
   email: "john.doe@example.com"
   password: "password"
   image: "image_url"
 
-two:
-  name: MyString
-  email: MyString
-  password: MyString
-  image: MyString
+invalid_user:
+  name: ""
+  email: "invalid_email"
+  password: ""
+  image: ""
