@@ -43,7 +43,7 @@ gem "active_model_serializers", "~> 0.10.12"
 gem "dotenv-rails"
 gem "rspec-rails"
 gem "sidekiq"
-
+gem "database_cleaner-active_record"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -63,6 +63,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "factory_bot_rails", "~> 6.2"
   gem "capybara"
   gem "selenium-webdriver"
 end
